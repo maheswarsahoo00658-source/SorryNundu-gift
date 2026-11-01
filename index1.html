@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sorry Preeti ❤️</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #240046, #7209b7, #f72585);
+    color: white;
+    overflow-x: hidden;
+    text-align: center;
+}
+
+.container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 25px 18px;
+    position: relative;
+    z-index: 2;
+}
+
+h1 {
+    font-size: clamp(40px, 9vw, 65px);
+    color: #ffb3d9;
+    text-shadow: 0 0 20px #ff0080;
+    animation: glow 2s infinite alternate;
+}
+
+@keyframes glow {
+    from { text-shadow: 0 0 10px #ff0080; }
+    to { text-shadow: 0 0 35px #fff; }
+}
+
+.name {
+    font-size: clamp(35px, 8vw, 50px);
+    color: #ffe66d;
+    margin: 15px;
+}
+
+.heart {
+    font-size: 85px;
+    margin: 20px;
+    animation: heartbeat 1.2s infinite;
+}
+
+@keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+}
+
+.message {
+    max-width: 520px;
+    padding: 25px;
+    margin: 15px;
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 22px;
+    backdrop-filter: blur(12px);
+    font-size: 17px;
+    line-height: 1.9;
+    box-shadow: 0 8px 30px #00000030;
+}
+
+button {
+    padding: 14px 30px;
+    border: none;
+    border-radius: 35px;
+    background: linear-gradient(45deg, #ff4d88, #ff9a9e);
+    color: white;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 12px;
+    box-shadow: 0 5px 20px #ff4d8870;
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: scale(1.08);
+}
+
+#surprise {
+    display: none;
+    max-width: 500px;
+    margin: 20px;
+    font-size: 20px;
+    line-height: 1.8;
+    color: #ffe66d;
+    animation: appear 1s ease;
+}
+
+@keyframes appear {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.floating-heart {
+    position: fixed;
+    bottom: -30px;
+    animation: float 6s linear infinite;
+    pointer-events: none;
+    z-index: 1;
+}
+
+@keyframes float {
+    0% { transform: translateY(0) rotate(0); opacity: 1; }
+    100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
+}
+
+canvas {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 5;
+}
+
+footer {
+    margin-top: 25px;
+    font-size: 14px;
+    opacity: 0.8;
+}
+
+@media(max-width: 480px) {
+    .heart { font-size: 65px; }
+    .message { font-size: 15px; padding: 18px; }
+    button { font-size: 15px; }
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="confetti"></canvas>
+
+<div class="container">
+
+    <h1>I'm Really Sorry 🥺</h1>
+
+    <h2 class="name">Preeti ❤️</h2>
+
+    <div class="heart">💗</div>
+
+    <div class="message">
+        Dear Preeti,
+
+        I know that I may have hurt you,
+        and I am genuinely sorry for that.
+
+        I never wanted to make you sad.
+        Your smile means a lot to me,
+        and I don't like seeing you upset.
+
+        I may not be perfect, but my feelings
+        and care for you are always genuine.
+
+        Please forgive me. ❤️
+
+        <br><br>
+        <b>I'm really sorry, Preeti! 🥺</b>
+    </div>
+
+    <button onclick="showSurprise()">
+        💌 One Last Thing...
+    </button>
+
+    <div id="surprise">
+        ❤️ Preeti, you are very special to me! ❤️
+        <br><br>
+        I don't want my ego to be bigger
+        than our bond.
+
+        <br><br>
+        Can we smile together again? 🥹
+        <br><br>
+        🌹 Sending you lots of love 🌹
+    </div>
+
+    <footer>
+        Made with ❤️ Just for Preeti
+    </footer>
+
+</div>
+
+<script>
+
+// Confetti animation
+const canvas = document.getElementById("confetti");
+const ctx = canvas.getContext("2d");
+
+let pieces = [];
+
+function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
+
+window.addEventListener("resize", resize);
+resize();
+
+function createConfetti() {
+    pieces = [];
+
+    for (let i = 0; i < 180; i++) {
+        pieces.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height - canvas.height,
+            size: Math.random() * 8 + 3,
+            speed: Math.random() * 4 + 2,
+            color: `hsl(${Math.random()*360},100%,65%)`,
+            rotation: Math.random() * 360
+        });
+    }
+}
+
+function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    pieces.forEach(p => {
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.rotate(p.rotation * Math.PI / 180);
+        ctx.fillStyle = p.color;
+        ctx.fillRect(-p.size/2, -p.size/2, p.size, p.size);
+        ctx.restore();
+
+        p.y += p.speed;
+        p.rotation += 3;
+
+        if (p.y > canvas.height) {
+            p.y = -10;
+            p.x = Math.random() * canvas.width;
+        }
+    });
+
+    requestAnimationFrame(animate);
+}
+
+createConfetti();
+animate();
+
+// Surprise button
+function showSurprise() {
+    document.getElementById("surprise").style.display = "block";
+    createConfetti();
+}
+
+// Floating hearts
+function createHeart() {
+    const heart = document.createElement("div");
+    heart.className = "floating-heart";
+    heart.innerHTML = "❤️";
+
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = (Math.random()*20+15) + "px";
+    heart.style.animationDuration = (Math.random()*4+4) + "s";
+
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 8000);
+}
+
+setInterval(createHeart, 700);
+
+</script>
+
+</body>
+</html>
